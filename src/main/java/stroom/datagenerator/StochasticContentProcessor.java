@@ -104,6 +104,9 @@ public class StochasticContentProcessor {
 
             StochasticTemplateProcessor processor = nextEventTimes.get(shortestInterval);
             currentTime = Instant.ofEpochMilli(currentTime.toEpochMilli() + shortestInterval);
+            if (!currentTime.isBefore(endTime)) {
+                break;
+            }
             context = new ProcessingContext(context, currentTime);
             try {
                 if (!firstEvent && betweenEventProcessor != null){
